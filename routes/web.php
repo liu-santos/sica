@@ -2,12 +2,23 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
+use App\Http\Middleware\CheckIsLogged;
+use App\Http\Middleware\CheckNotLogged;
 use Illuminate\Support\Facades\Route;
 
+Route::middleware([CheckNotLogged::class])->group(function () {
+    
 Route::get('/login', [AuthController::class, 'login'])->name('login'); 
-Route::post('/loginSubmit', [AuthController::class, 'loginSubmit'])->name('loginSubmit');    
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout'); 
+Route::post('/loginSubmit', [AuthController::class, 'loginSubmit'])->name('loginSubmit');  
+
+});
+
+  
 
 
-Route::get('/logout', [MainController::class, 'index']); 
-
+Route::middleware([CheckIsLogged::class])->group(function () {
+    Route::get('/home', [MainController::class, 'index'])->name('home');
+    Route::get('/newNote', [MainController::class, 'newNote']);
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout'); 
+});
+ 

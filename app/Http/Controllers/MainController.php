@@ -9,7 +9,7 @@ class MainController extends Controller
 
     public function index()
     {
-            echo 'volta';
+           return view('home');
 
     }
 

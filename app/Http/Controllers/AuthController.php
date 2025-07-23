@@ -67,7 +67,7 @@ class AuthController extends Controller
             ]);
 
 
-         echo'login sucesso';
+         return redirect()->to('/home')->with('success', 'Login efetuado com sucesso!');
       
     }
 
