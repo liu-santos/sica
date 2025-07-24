@@ -10,14 +10,14 @@ class Operations
     public static function decryptId ($value){
 
         try {
-           
-            $value = Crypt::decrypt($value);           
-           
+
+            $value = Crypt::decrypt($value);
+
 
         } catch (DecryptException $e) {
 
             return redirect()->route('home');
-           
+
         }
 
         return $value;
